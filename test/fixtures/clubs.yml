@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  book_due_date: 2018-11-07 22:21:48
+
+two:
+  title: MyString
+  description: MyText
+  book_due_date: 2018-11-07 22:21:48
