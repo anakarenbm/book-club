@@ -1,13 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Clubs</h1>
+<h1>My Clubs</h1>
+
+<% if user_signed_in? %>
+<% if Club.where("admin_id = ?", current_user.id).find_each.any? %>
+  <h2>Clubs that I manage:</h2>
+  <div class="row">
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <% club_title_class = "list-group-item list-group-item-action active" %>
+        <% Club.where("admin_id = ?", current_user.id).find_each do |club| %>
+            <%= link_to(club.title, "#list-"+club.id.to_s, class: club_title_class, id:"list-"+club.id.to_s+"-list", role:"tab",data: {
+              toggle: "list"}) %>
+            <% club_title_class = "list-group-item list-group-item-action" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="tab-content" id="nav-tabContent">
+        <h5>Description</h5>
+        <% club_description_class = "tab-pane fade show active" %>
+        <% Club.where("admin_id = ?", current_user.id).find_each do |club| %>
+          <% club_description_id = "list-" %>
+            <div class="<%= club_description_class %>" id="<%= club_description_id+club.id.to_s %>" role="tabpanel">
+              <%= club.description %>
+              <div class="mb-3 mt-3"> <%= link_to 'Go to Club!', club,  class: 'btn btn-primary' %> </div>
+            </div>
+            <% club_description_class = "tab-pane fade show" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+
+<h2>Clubs that I am a member of: </h2>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Description</th>
-      <th>Book due date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +48,6 @@
     <% @clubs.each do |club| %>
       <tr>
         <td><%= club.title %></td>
-        <td><%= club.description %></td>
-        <td><%= club.book_due_date %></td>
-        <td><%= link_to 'Show', club %></td>
         <td><%= link_to 'Edit', edit_club_path(club) %></td>
         <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

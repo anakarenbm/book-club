@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # resources :book_lists
   # resources :books
-  resources :clubs
+  # resources :clubs
   # resources :comments
   # resources :genres
   # resources :likes
@@ -17,6 +17,16 @@ Rails.application.routes.draw do
   # resources :reviews
   # resources :user_clubs
   # # resources :users
+
+  resources :clubs do
+    scope module: :clubs do
+      resources :posts do
+        scope module: :posts do
+          resources :comments
+        end
+      end
+    end
+  end
 
   root to: redirect('/clubs')
   # root to: "users#index"
