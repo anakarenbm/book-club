@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root to: "home#index"
 
   # resources :book_lists
-  # resources :books
+  resources :books
   # resources :clubs
   # resources :comments
   # resources :genres
