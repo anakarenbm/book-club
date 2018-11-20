@@ -41,6 +41,8 @@ gem 'bootstrap'
 
 gem 'jquery-rails'
 
+gem 'inline_svg'
+
 gem 'devise'
 
 group :development, :test do

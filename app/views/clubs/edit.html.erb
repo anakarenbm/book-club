@@ -1,6 +1,17 @@
 <h1>Editing Club</h1>
 
-<%= render 'form', club: @club %>
+<h1 class="display-4"><%= @club.title %></h1>
+<p class="lead"><%= @club.description %></p>
 
-<%= link_to 'Show', @club %> |
-<%= link_to 'Back', clubs_path %>
+<%= form_for @club do |f| %>
+  <div class="form-group">
+    <%= f.label :title, 'Name of club' %>
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Title'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, 'Description' %>
+    <%= f.text_area :description,class: 'form-control', placeholder: 'What is the club about..'%>
+  </div>
+
+  <%= f.submit "Update Club", class: 'float-right btn btn-light mt-1' %><br/>
+<% end %>

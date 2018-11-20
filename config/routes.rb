@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # resources :posts
   # resources :reviews
   # resources :user_clubs
-  # # resources :users
+  resources :users
 
   resources :clubs do
     scope module: :clubs do

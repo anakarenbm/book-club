@@ -1,5 +1,14 @@
-<h1>New Club</h1>
+<h1>Create a New Club</h1>
 
-<%= render 'form', club: @club %>
+<%= form_for @club do |f| %>
+  <div class="form-group">
+    <%= f.label :title, 'Name of club' %>
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Title'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, 'Description' %>
+    <%= f.text_area :description,class: 'form-control', placeholder: 'What is the club about..'%>
+  </div>
 
-<%= link_to 'Back', clubs_path %>
+  <%= f.submit "Create Club", class: 'float-right btn btn-light mt-1' %><br/>
+<% end %>

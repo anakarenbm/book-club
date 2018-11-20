@@ -1,3 +1,5 @@
+<%= render 'admin_dropdown', club: @clubool %>
+
 <h1 class="display-4"><%= @club.title %></h1>
 <p class="lead"><%= @club.description %></p>
 
@@ -60,6 +62,3 @@
   <strong>Book due date:</strong>
   <%= @club.book_due_date %>
 </p>
-
-<%= link_to 'Edit', edit_club_path(@club) %> |
-<%= link_to 'Back', clubs_path %>

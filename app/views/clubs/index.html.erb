@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<%= link_to 'Open a Club', new_club_path, class: 'btn btn-primary btn-lg float-right' %>
 <h1>My Clubs</h1>
 
 <% if user_signed_in? %>
@@ -48,13 +47,9 @@
     <% @clubs.each do |club| %>
       <tr>
         <td><%= club.title %></td>
-        <td><%= link_to 'Edit', edit_club_path(club) %></td>
-        <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Club', new_club_path %>
