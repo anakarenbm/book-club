@@ -4,6 +4,8 @@
 
 <%= render 'new_book_modal', book: @book %>
 
+<%= render 'show_book_modal' %>
+
 <div class="row">
   <% @books.each do |book| %>
     <div class="col-md-4">
@@ -24,7 +26,18 @@
             <strong>Avg Rating:</strong> 5 stars
           </p>
           <div class="d-flex justify-content-between align-items-center">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Add to my list</button>
+
+            <%= form_for [book,@user_book_list] do |f| %>
+              <div class="form-group row">
+
+              </div>
+
+              <%= f.select(:status, [['Reading', '1'],['Wish List', '2'],['Done', '3']],
+                {prompt: 'Add to List'}, {:class => 'form-control', :onchange => 'this.form.submit()' }) %>
+
+
+            <% end %>
+
             <button type="button" class="btn btn-sm btn-outline-secondary">Open</button>
           </div>
         </div>

@@ -2,11 +2,16 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new
+    @user_book_list = BookList.new
   end
 
   # def new
   #   @book = Book.new
   # end
+
+  def all_index
+    @books = Book.all
+  end
 
   def create
     @book = Book.new(book_params)

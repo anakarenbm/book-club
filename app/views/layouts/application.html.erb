@@ -23,10 +23,10 @@
             <%= link_to('My Profile', user_path(current_user), class: "nav-link")  %>
           </li>
           <li class="nav-item active">
-            <%= link_to('My Clubs', clubs_path, class: "nav-link")  %>
+            <%= link_to('My Clubs', user_clubs_path(current_user), class: "nav-link")  %>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Join a Club</a>
+            <%= link_to('Join a Club', clubs_path, class: "nav-link")  %>
           </li>
           <li class="nav-item active">
             <%= link_to('Search all Books', books_path, class: "nav-link")  %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_184631) do
+ActiveRecord::Schema.define(version: 2018_11_24_035220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 2018_11_16_184631) do
     t.integer "pages_read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ownerable_type"
+    t.bigint "ownerable_id"
     t.index ["book_id"], name: "index_book_lists_on_book_id"
+    t.index ["ownerable_type", "ownerable_id"], name: "index_book_lists_on_ownerable_type_and_ownerable_id"
   end
 
   create_table "books", force: :cascade do |t|

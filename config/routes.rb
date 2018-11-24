@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   # root to: "home#index"
 
   # resources :book_lists
-  resources :books
+  resources :books do
+    scope module: :books do
+      resources :book_lists
+    end
+  end
   # resources :clubs
   # resources :comments
   # resources :genres
@@ -16,7 +20,11 @@ Rails.application.routes.draw do
   # resources :posts
   # resources :reviews
   # resources :user_clubs
-  resources :users
+  resources :users do
+    scope module: :users do
+      resources :clubs
+    end
+  end
 
   resources :clubs do
     scope module: :clubs do
