@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col-md-4 order-md-2 mb-4 container-sidebar">
-    <h1 class="display-4 text-center"> NAME AND <%= current_user.name %> </h1>
-    <h1 class="display-4 text-center"> LAST-NAME <%= current_user.last_name %> </h1>
+    <h1 class="display-4 text-center"> <%= current_user.name %> </h1>
+    <h1 class="display-4 text-center"> <%= current_user.last_name %> </h1>
     <p class="lead"> <%= current_user.email %> </p>
     <p class="lead text-center">10 Books Read</p>
+    <%= link_to 'Edit My Info', edit_user_registration_path, class: "dropdown-item" %>
   </div>
   <div class="col-md-8 order-md-1 container-body">
     <div class="mb-3 p-3 bg-white rounded box-shadow">
