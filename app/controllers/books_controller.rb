@@ -5,9 +5,9 @@ class BooksController < ApplicationController
     @user_book_list = BookList.new
   end
 
-  # def new
-  #   @book = Book.new
-  # end
+  def show
+    @book = Book.find(params[:id])
+  end
 
   def all_index
     @books = Book.all
