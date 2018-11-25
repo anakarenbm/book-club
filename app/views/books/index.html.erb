@@ -7,9 +7,23 @@
 <div class="row">
   <% @books.each do |book| %>
     <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
+
+
+
+      <div class="card mb-4 shadow-sm book-content">
         <%= image_tag book.picture_url, style:'height: 225px; width: 100%; display: block;'%>
+
         <div class="card-body">
+
+          <%= link_to edit_book_path(book), remote: true, class: 'edit_book_modal_link btn btn-sm btn-outline-secondary edit-link' do %>
+            <%= icon_tag "edit-icon" %>
+          <% end %>
+
+
+          <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true"></div>
+
+
+
           <h5 class="card-title"> <%= book.title %> </h5>
           <p>
             <strong>Author:</strong> <%= book.author %>
@@ -28,11 +42,12 @@
             <%= f.select(:status, [['Reading', '1'],['Wish List', '2'],['Done', '3']],
               {prompt: 'Add to List'}, {:class => 'form-control', :onchange => 'this.form.submit()' }) %>
             <% end %>
-            <%= link_to "view", book_path(book), remote: true, class: 'show_book_modal_link btn btn-sm btn-outline-secondary'%>
+            <%= link_to "View", book_path(book), remote: true, class: 'show_book_modal_link btn btn-sm btn-outline-secondary'%>
             <div class="modal fade" id="showBookModal" tabindex="-1" role="dialog" aria-labelledby="showBookModalLabel" aria-hidden="true"></div>
           </div>
         </div>
       </div>
+
     </div>
   <% end %>
 </div>

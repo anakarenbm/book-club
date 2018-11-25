@@ -13,6 +13,10 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def edit
+    @edit_book = Book.find(params[:id])
+  end
+
   def create
     @book = Book.new(book_params)
 
@@ -22,7 +26,23 @@ class BooksController < ApplicationController
         format.json { render :show, status: :created, location: @club }
       else
         format.html { render :new }
-        format.json { render json: @club.errors, status: :unprocessable_entity }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    puts 'UPSATEEEEEEEEEEEE'
+
+    respond_to do |format|
+      puts 'UPSATEEEEEEEEEEEE'
+
+      if @edit_book.update(book_params)
+        format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
+        format.json { render :show, status: :ok, location: @club }
+      else
+        format.html { render :edit }
+        format.json { render json: @edit_book.errors, status: :unprocessable_entity }
       end
     end
   end
