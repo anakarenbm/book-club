@@ -28,6 +28,7 @@
 .container-sidebar {
     background-color: #DDA3B2;
     border-radius: .25rem;
+    height: max-content;
 }
 
 .post-user-display {
@@ -62,4 +63,8 @@
     right: 0px;
     background-color: rgba(0, 0, 0, 0.5);
     fill: white;
+}
+
+.progress{
+  width: -webkit-fill-available;
 }
