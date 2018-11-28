@@ -40,7 +40,7 @@
                     <%= render 'rate_book_modal', list_item: list_item %>
                     <% else %>
                     <p>
-                      <strong>My Rating:</strong> 5 stars
+                      <strong>My Rating:</strong> <%= pluralize(user_review.stars, "star") %>
                     </p>
 
                     <%= link_to("Edit Review", "#", data: {

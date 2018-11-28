@@ -27,7 +27,7 @@
                     <strong>Genre:</strong> <%= list_item.book.genre.name %>
                   </p>
                   <p>
-                    <strong>Avg Rating:</strong> 5 stars
+                    <strong>Avg Rating:</strong> <%= pluralize(list_item.book.avgRating, "star") %>
                   </p>
                   <p class="lead">
                     <%= list_item.book.pages - list_item.pages_read  %> <strong> pages left to finish!</strong>

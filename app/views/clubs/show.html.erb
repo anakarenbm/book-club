@@ -19,11 +19,11 @@
 
         <div class="media text-muted pt-3">
           <span alt="32x32" class="d-flex justify-content-center mr-2 rounded post-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
-            <%= post.user.email[0].upcase %>
+            <%= post.user.user_initial %>
           </span>
           <div class="media-body border-bottom border-gray">
           <p class="pb-3 mb-0 small lh-125">
-            <strong class="d-block text-gray-dark"> <%= current_user.email %> </strong>
+            <strong class="d-block text-gray-dark"> <%= post.user.username %> </strong>
             <%= post.content %>
           </p>
 
@@ -40,11 +40,11 @@
             <div class="media mt-3">
               <a class="pr-3">
                 <span alt="32x32" class="d-flex justify-content-center mr-2 rounded comment-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
-                  <%= comment.user.email[0].upcase %>
+                  <%= comment.user.user_initial %>
                 </span>
               </a>
               <p class="pb-3 mb-0 small lh-125">
-                <strong class="d-block text-gray-dark"> <%= comment.user.email %> </strong>
+                <strong class="d-block text-gray-dark"> <%= comment.user.username %> </strong>
                 <%= comment.content %>
               </p>
             </div>

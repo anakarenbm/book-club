@@ -30,7 +30,7 @@
                     <strong>Length:</strong>  <%= list_item.book.pages %> pages
                   </p>
                   <p>
-                    <strong>Avg Rating:</strong> 5 stars
+                    <strong>Avg Rating:</strong> <%= pluralize(list_item.book.avgRating, "star") %>
                   </p>
                   <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
                 </div>

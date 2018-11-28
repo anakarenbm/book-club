@@ -35,7 +35,7 @@
             <strong>Length:</strong>  <%= book.pages %> pages
           </p>
           <p>
-            <strong>Avg Rating:</strong> 5 stars
+            <strong>Avg Rating:</strong> <%= pluralize(book.avgRating, "star") %>
           </p>
           <div class="d-flex justify-content-between align-items-center">
             <%= form_for [book,@user_book_list] do |f| %>
