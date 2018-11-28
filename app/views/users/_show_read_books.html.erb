@@ -43,7 +43,7 @@
                       <strong>My Rating:</strong> <%= pluralize(user_review.stars, "star") %>
                     </p>
 
-                    <%= link_to("Edit Review", "#", data: {
+                    <%= link_to("Edit My Review", "#", data: {
                       toggle: "modal", target: "#edit-review-modal-"+list_item.id.to_s}) %>
 
                       <%= render 'edit_review_modal', list_item: list_item, user_review: user_review %>

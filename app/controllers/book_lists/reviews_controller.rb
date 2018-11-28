@@ -13,6 +13,17 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def update
+    @review = Review.find(params[:id])
+    respond_to do |format|
+      if @review.update(review_params)
+        format.html { redirect_to user_path(current_user), notice: 'Review was successfully updated.' }
+      else
+        format.html { redirect_to user_path(current_user), notice: 'Error updating review.' }
+      end
+    end
+  end
+
   private
 
     def review_params
