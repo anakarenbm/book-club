@@ -1,11 +1,13 @@
 class BookListsController < ApplicationController
-  def show
-  end
 
   def update
     @book_list = BookList.find(params[:id])
     respond_to do |format|
-      if @book_list.update(book_list_params)
+      updated_params = book_list_params
+      if finished_book?
+        updated_params = updated_params.merge(change_status_to_done)
+      end
+      if @book_list.update(updated_params)
         format.html { redirect_to user_path(current_user), notice: 'Book-List was successfully updated.' }
         format.json { render :show, status: :ok, location: @book_list }
       else
@@ -15,17 +17,30 @@ class BookListsController < ApplicationController
     end
   end
 
+  def destroy
+    @book_list = BookList.find(params[:id])
+    @book_list.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user), notice: 'Book was successfully removed from list.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def book_list_params
       params.require(:book_list).permit(:pages_read)
     end
 
-    # def default_params
-    #   {
-    #     ownerable: current_user, #owner could be a club (tbd for implementation)
-    #     book: @book
-    #   }
-    # end
+    def finished_book?
+      book_list_params[:pages_read].to_i >= @book_list.book.pages
+    end
+
+    def change_status_to_done
+      {
+        status: 3
+      }
+    end
+
 end

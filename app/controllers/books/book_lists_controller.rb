@@ -28,7 +28,8 @@ class BookListsController < ApplicationController
     def default_params
       {
         ownerable: current_user, #owner could be a club (tbd for implementation)
-        book: @book
+        book: @book,
+        pages_read: 0
       }
     end
 end

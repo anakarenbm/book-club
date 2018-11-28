@@ -1,33 +1,15 @@
-<!-- Small modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
-
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>I've read
-          <input type="number" class="form-control">
-          pages out of 200
-        </p>
+<div class="row">
+  <div class="col-md-4 order-md-2 mb-4 p-0 container-sidebar">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h1 class="display-4 text-center"> <%= current_user.name %> </h1>
+        <h1 class="display-4 text-center"> <%= current_user.last_name %> </h1></br>
+        <p class="lead text-center">
+        <%=  pluralize(BookList.where(ownerable_id:current_user.id, ownerable_type:"User", status:3).count, "Book") %> Read
+      </p></br>
+        <%= link_to 'Edit My Info', edit_user_registration_path %>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-4 order-md-2 mb-4 container-sidebar">
-    <h1 class="display-4 text-center"> <%= current_user.name %> </h1>
-    <h1 class="display-4 text-center"> <%= current_user.last_name %> </h1>
-    <p class="lead"> <%= current_user.email %> </p>
-    <p class="lead text-center">
-      <%= BookList.where(ownerable_id:current_user.id, ownerable_type:"User").count %> Books Read
-    </p>
-    <%= link_to 'Edit My Info', edit_user_registration_path, class: "dropdown-item" %>
   </div>
   <div class="col-md-8 order-md-1 container-body">
     <div class="mb-3 p-3 bg-white rounded box-shadow">
@@ -74,6 +56,8 @@
                         </div>
                         <%= link_to("Edit", "#", data: {
                           toggle: "modal", target: "#edit-modal-"+list_item.id.to_s}) %>
+
+                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
 
                         <div class="modal fade bd-example-modal-sm" id="<%= "edit-modal-"+list_item.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                           <div class="modal-dialog ">
@@ -140,6 +124,7 @@
                         <p>
                           <strong>Avg Rating:</strong> 5 stars
                         </p>
+                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
                       </div>
                     </div>
                 </div>
@@ -184,6 +169,7 @@
                         <p>
                           <strong>My Rating:</strong> 5 stars
                         </p>
+                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
                       </div>
                     </div>
                 </div>

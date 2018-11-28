@@ -14,6 +14,7 @@ class ClubsController < ApplicationController
     @all_posts = Post.all
     @new_post = Post.new
     @new_comment = Comment.new
+    @new_current_book = BookList.new
   end
 
   # GET /clubs/new

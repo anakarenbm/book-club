@@ -4,8 +4,8 @@
 <p class="lead"><%= @club.description %></p>
 
 <div class="row">
-  <div class="col-md-4 order-md-2 mb-4 container-sidebar">
-    Book Being read
+  <div class="col-md-4 order-md-2 mb-4 p-0 container-sidebar">
+    <%= render 'book_card', club: @clubool %>
   </div>
   <div class="col-md-8 order-md-1 container-body">
     <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -57,8 +57,3 @@
     </div>
   </div>
 </div>
-
-<p>
-  <strong>Book due date:</strong>
-  <%= @club.book_due_date %>
-</p>
