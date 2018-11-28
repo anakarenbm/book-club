@@ -1,0 +1,8 @@
+<div class="card-body">
+  <h1 class="display-4 text-center"> <%= current_user.name %> </h1>
+  <h1 class="display-4 text-center"> <%= current_user.last_name %> </h1></br>
+  <p class="lead text-center">
+  <%=  pluralize(BookList.where(ownerable_id:current_user.id, ownerable_type:"User", status:3).count, "Book") %> Read
+</p></br>
+  <%= link_to 'Edit My Info', edit_user_registration_path %>
+</div>

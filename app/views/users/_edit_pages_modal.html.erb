@@ -1,0 +1,20 @@
+<div class="modal fade bd-example-modal-sm" id="<%= "edit-pages-modal-"+list_item.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>I've read
+          <%= form_for [list_item] do |f| %>
+            <%= f.number_field :pages_read, class: 'form-control'%>
+            <%= f.submit "Update Pages Read", class: 'float-right btn btn-light mt-1' %><br/>
+          <% end %>
+          pages out of <%= list_item.book.pages %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

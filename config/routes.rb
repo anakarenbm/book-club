@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   # # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root to: "home#index"
 
-  resources :book_lists
+  resources :book_lists do
+    scope module: :book_lists do
+      resources :reviews
+    end
+  end
   resources :books do
     scope module: :books do
       resources :book_lists

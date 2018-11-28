@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <% book_title_class = "list-group-item list-group-item-action active" %>
+      <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 2).find_each do |list_item| %>
+          <%= link_to(list_item.book.title, "#list-"+list_item.id.to_s, class: book_title_class, id:"list-"+list_item.id.to_s+"-list", role:"tab",data: {
+            toggle: "list"}) %>
+          <% book_title_class = "list-group-item list-group-item-action" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <% book_description_class = "tab-pane fade show active" %>
+      <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 2).find_each do |list_item| %>
+        <% book_description_id = "list-" %>
+          <div class="<%= book_description_class %>" id="<%= book_description_id+list_item.id.to_s %>" role="tabpanel">
+
+            <div class="card flex-md-row mb-4 h-md-250 border-0">
+              <%= image_tag list_item.book.picture_url, class:'card-img-right flex-auto d-none d-lg-block', style:'width: 200px; height: 250px;'%>
+
+                <div class="card-body d-flex flex-column align-items-start">
+                  <p>
+                    <strong>Author:</strong> <%= list_item.book.author %>
+                  </p>
+                  <p>
+                    <strong>Genre:</strong> <%= list_item.book.genre.name %>
+                  </p>
+                  <p>
+                    <strong>Length:</strong>  <%= list_item.book.pages %> pages
+                  </p>
+                  <p>
+                    <strong>Avg Rating:</strong> 5 stars
+                  </p>
+                  <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </div>
+          </div>
+          <% book_description_class = "tab-pane fade show" %>
+      <% end %>
+    </div>
+  </div>
+</div>

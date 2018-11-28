@@ -1,189 +1,19 @@
 <div class="row">
   <div class="col-md-4 order-md-2 mb-4 p-0 container-sidebar">
     <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h1 class="display-4 text-center"> <%= current_user.name %> </h1>
-        <h1 class="display-4 text-center"> <%= current_user.last_name %> </h1></br>
-        <p class="lead text-center">
-        <%=  pluralize(BookList.where(ownerable_id:current_user.id, ownerable_type:"User", status:3).count, "Book") %> Read
-      </p></br>
-        <%= link_to 'Edit My Info', edit_user_registration_path %>
-      </div>
+      <%= render 'show_user_card' %>
     </div>
   </div>
   <div class="col-md-8 order-md-1 container-body">
     <div class="mb-3 p-3 bg-white rounded box-shadow">
       <div class="container">
-      <h6 class="border-bottom border-gray pb-2 mb-0"> What I Am Reading: </h6></br>
-
-      <div class="row">
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-            <% book_title_class = "list-group-item list-group-item-action active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 1).find_each do |list_item| %>
-                <%= link_to(list_item.book.title, "#list-"+list_item.id.to_s, class: book_title_class, id:"list-"+list_item.id.to_s+"-list", role:"tab",data: {
-                  toggle: "list"}) %>
-                <% book_title_class = "list-group-item list-group-item-action" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-8">
-          <div class="tab-content" id="nav-tabContent">
-            <% book_description_class = "tab-pane fade show active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 1).find_each do |list_item| %>
-              <% book_description_id = "list-" %>
-                <div class="<%= book_description_class %>" id="<%= book_description_id+list_item.id.to_s %>" role="tabpanel">
-
-                  <div class="card flex-md-row mb-4 h-md-250 border-0">
-                    <%= image_tag list_item.book.picture_url, class:'card-img-right flex-auto d-none d-lg-block', style:'width: 200px; height: 250px;'%>
-
-                      <div class="card-body d-flex flex-column align-items-start">
-                        <p>
-                          <strong>Author:</strong> <%= list_item.book.author %>
-                        </p>
-                        <p>
-                          <strong>Genre:</strong> <%= list_item.book.genre.name %>
-                        </p>
-                        <p>
-                          <strong>Avg Rating:</strong> 5 stars
-                        </p>
-                        <p class="lead">
-                          <%= list_item.book.pages - list_item.pages_read  %> <strong> pages left to finish!</strong>
-                        </p>
-                        <div class="progress" style="height: 20px;">
-                          <% percentage = (list_item.pages_read)/(list_item.book.pages.to_f) * 100 %>
-                          <div class="progress-bar" role="progressbar" style="<%= "width: #{percentage}%" %>" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <%= link_to("Edit", "#", data: {
-                          toggle: "modal", target: "#edit-modal-"+list_item.id.to_s}) %>
-
-                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-                        <div class="modal fade bd-example-modal-sm" id="<%= "edit-modal-"+list_item.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                          <div class="modal-dialog ">
-                            <div class="modal-content">
-                              <div class="modal-header border-0">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <p>I've read
-                                  <%= form_for [list_item] do |f| %>
-                                    <%= f.number_field :pages_read, class: 'form-control'%>
-                                    <%= f.submit "Update Pages Read", class: 'float-right btn btn-light mt-1' %><br/>
-                                  <% end %>
-                                  pages out of <%= list_item.book.pages %>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                </div>
-                <% book_description_class = "tab-pane fade show" %>
-            <% end %>
-          </div>
-        </div>
+        <h6 class="border-bottom border-gray pb-2 mb-0"> What I Am Reading: </h6></br>
+        <%= render 'show_reading' %>
+        </br><h6 class="border-bottom border-gray pb-2 mb-0"> My Wish List: </h6></br>
+        <%= render 'show_wish_list' %>
+        </br><h6 class="border-bottom border-gray pb-2 mb-0"> Books I Have Read </h6></br>
+        <%= render 'show_read_books' %>
       </div>
-
-      </br><h6 class="border-bottom border-gray pb-2 mb-0"> My Wish List: </h6></br>
-      <div class="row">
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-            <% book_title_class = "list-group-item list-group-item-action active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 2).find_each do |list_item| %>
-                <%= link_to(list_item.book.title, "#list-"+list_item.id.to_s, class: book_title_class, id:"list-"+list_item.id.to_s+"-list", role:"tab",data: {
-                  toggle: "list"}) %>
-                <% book_title_class = "list-group-item list-group-item-action" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-8">
-          <div class="tab-content" id="nav-tabContent">
-            <% book_description_class = "tab-pane fade show active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 2).find_each do |list_item| %>
-              <% book_description_id = "list-" %>
-                <div class="<%= book_description_class %>" id="<%= book_description_id+list_item.id.to_s %>" role="tabpanel">
-
-                  <div class="card flex-md-row mb-4 h-md-250 border-0">
-                    <%= image_tag list_item.book.picture_url, class:'card-img-right flex-auto d-none d-lg-block', style:'width: 200px; height: 250px;'%>
-
-                      <div class="card-body d-flex flex-column align-items-start">
-                        <p>
-                          <strong>Author:</strong> <%= list_item.book.author %>
-                        </p>
-                        <p>
-                          <strong>Genre:</strong> <%= list_item.book.genre.name %>
-                        </p>
-                        <p>
-                          <strong>Length:</strong>  <%= list_item.book.pages %> pages
-                        </p>
-                        <p>
-                          <strong>Avg Rating:</strong> 5 stars
-                        </p>
-                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      </div>
-                    </div>
-                </div>
-                <% book_description_class = "tab-pane fade show" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-
-      </br><h6 class="border-bottom border-gray pb-2 mb-0"> Books I Have Read </h6></br>
-      <div class="row">
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-            <% book_title_class = "list-group-item list-group-item-action active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 3).find_each do |list_item| %>
-                <%= link_to(list_item.book.title, "#list-"+list_item.id.to_s, class: book_title_class, id:"list-"+list_item.id.to_s+"-list", role:"tab",data: {
-                  toggle: "list"}) %>
-                <% book_title_class = "list-group-item list-group-item-action" %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-8">
-          <div class="tab-content" id="nav-tabContent">
-            <% book_description_class = "tab-pane fade show active" %>
-            <% BookList.where(ownerable_id: current_user.id, ownerable_type: "User", status: 3).find_each do |list_item| %>
-              <% book_description_id = "list-" %>
-                <div class="<%= book_description_class %>" id="<%= book_description_id+list_item.id.to_s %>" role="tabpanel">
-
-                  <div class="card flex-md-row mb-4 h-md-250 border-0">
-                      <%= image_tag list_item.book.picture_url, class:'card-img-right flex-auto d-none d-lg-block', style:'width: 200px; height: 250px;'%>
-                      <div class="card-body d-flex flex-column align-items-start">
-                        <p>
-                          <strong>Author:</strong> <%= list_item.book.author %>
-                        </p>
-                        <p>
-                          <strong>Genre:</strong> <%= list_item.book.genre.name %>
-                        </p>
-                        <p>
-                          <strong>Length:</strong>  <%= list_item.book.pages %> pages
-                        </p>
-                        <p>
-                          <strong>My Rating:</strong> 5 stars
-                        </p>
-                        <%= link_to 'Remove', list_item, method: :delete, data: { confirm: 'Are you sure?' } %>
-                      </div>
-                    </div>
-                </div>
-                <% book_description_class = "tab-pane fade show" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-    </div>
     </div>
   </div>
 </div>
