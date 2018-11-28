@@ -23,4 +23,7 @@ class User < ApplicationRecord
     return email
   end
 
+  def is_member_of_club?(club)
+    return UserClub.where(user: self, club: club).any?
+  end
 end

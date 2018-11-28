@@ -2,14 +2,11 @@ class ClubsController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
-  # GET /clubs
-  # GET /clubs.json
   def index
     @clubs = Club.all
+    @new_user_joins_club = UserClub.new
   end
 
-  # GET /clubs/1
-  # GET /clubs/1.json
   def show
     @all_posts = Post.all
     @new_post = Post.new
@@ -17,17 +14,13 @@ class ClubsController < ApplicationController
     @new_current_book = BookList.new
   end
 
-  # GET /clubs/new
   def new
     @club = Club.new
   end
 
-  # GET /clubs/1/edit
   def edit
   end
 
-  # POST /clubs
-  # POST /clubs.json
   def create
     @club = Club.new(club_params.merge(default_params))
 
@@ -42,8 +35,6 @@ class ClubsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clubs/1
-  # PATCH/PUT /clubs/1.json
   def update
     respond_to do |format|
       if @club.update(club_params)
@@ -56,8 +47,6 @@ class ClubsController < ApplicationController
     end
   end
 
-  # DELETE /clubs/1
-  # DELETE /clubs/1.json
   def destroy
     @club.destroy
     respond_to do |format|
@@ -67,12 +56,11 @@ class ClubsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_club
       @club = Club.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
       params.require(:club).permit(:title, :description, :book_due_date)
     end

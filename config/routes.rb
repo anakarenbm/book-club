@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :clubs do
     scope module: :clubs do
       resources :book_lists
+      resources :user_clubs
       resources :posts do
         scope module: :posts do
           resources :comments
