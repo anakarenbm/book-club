@@ -1,11 +1,13 @@
-<%= render 'admin_dropdown', club: @clubool %>
+<% if current_user.is_admin_of_club?(@club) %>
+  <%= render 'admin_dropdown', club: @club %>
+<% end %>
 
 <h1 class="display-4"><%= @club.title %></h1>
 <p class="lead"><%= @club.description %></p>
 
 <div class="row">
   <div class="col-md-4 order-md-2 mb-4 p-0 container-sidebar">
-    <%= render 'book_card', club: @clubool %>
+    <%= render 'book_card', club: @club %>
   </div>
   <div class="col-md-8 order-md-1 container-body">
     <div class="my-3 p-3 bg-white rounded box-shadow">
