@@ -30,4 +30,8 @@ class User < ApplicationRecord
   def is_admin_of_club?(club)
     return club.admin == self
   end
+
+  def belongs_to_club?(club)
+    return is_member_of_club?(club) || is_admin_of_club?(club)
+  end
 end

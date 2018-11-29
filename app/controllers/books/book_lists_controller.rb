@@ -1,5 +1,7 @@
 module Books
 class BookListsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
   end
 

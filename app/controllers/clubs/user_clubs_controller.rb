@@ -1,5 +1,6 @@
 module Clubs
   class UserClubsController < ApplicationController
+    before_action :authenticate_user!
 
     def create
       @club = Club.find(params[:club_id])

@@ -1,5 +1,6 @@
 module BookLists
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     @book_list = BookList.find(params[:book_list_id])

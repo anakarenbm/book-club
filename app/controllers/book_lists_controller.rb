@@ -1,4 +1,5 @@
 class BookListsController < ApplicationController
+  before_action :authenticate_user!
 
   def update
     @book_list = BookList.find(params[:id])
