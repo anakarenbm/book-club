@@ -36,14 +36,16 @@
       </div>
     <% end %>
     <% if @club.book_due_date.nil? %>
-      <div class="d-flex justify-content-between align-items-center">
-        <%= form_for @club do |f| %>
-          <div class="field">
-            <%= f.label :book_due_date, 'Due Date:' %>
-            <%= f.date_select :book_due_date %>
-          </div>
-        <% end %>
-      </div>
+      <% if current_user.is_admin_of_club?(@club) %>
+        <div class="d-flex justify-content-between align-items-center">
+          <%= form_for @club do |f| %>
+            <div class="field">
+              <%= f.label :book_due_date, 'Due Date:' %>
+              <%= f.date_select :book_due_date %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% else %>
       <p>
         <strong>Book due date:</strong>
