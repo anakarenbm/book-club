@@ -9,10 +9,8 @@ module Clubs
       respond_to do |format|
         if @book_list.save
           format.html { redirect_to @club, notice: 'Book was added to the club.' }
-          # format.json { render :show, status: :created, location: @book_list }
         else
           format.html { redirect_to @club, notice: @book_list.errors.full_messages }
-          # format.json { render json: @book_list.errors, status: :unprocessable_entity }
         end
       end
     end

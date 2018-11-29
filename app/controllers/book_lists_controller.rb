@@ -30,18 +30,17 @@ class BookListsController < ApplicationController
 
   private
 
-    def book_list_params
-      params.require(:book_list).permit(:pages_read)
-    end
+  def book_list_params
+    params.require(:book_list).permit(:pages_read)
+  end
 
-    def finished_book?
-      book_list_params[:pages_read].to_i >= @book_list.book.pages
-    end
+  def finished_book?
+    book_list_params[:pages_read].to_i >= @book_list.book.pages
+  end
 
-    def change_status_to_done
-      {
-        status: 3
-      }
-    end
-
+  def change_status_to_done
+    {
+      status: 3
+    }
+  end
 end
