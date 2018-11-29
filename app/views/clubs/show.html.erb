@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-8 order-md-1 container-body">
       <div class="my-3 p-3 bg-white rounded box-shadow">
-        <%= render 'clubs/posts/form_for_posts' %>
+        <%= render 'clubs/posts/form_for_posts', club: @club, post: @new_post%>
         <div class="container">
           <h6 class="border-bottom border-gray pb-2 mb-0"> Recent Posts </h6>
           <%= render 'clubs/posts/show_posts' %>

@@ -4,10 +4,17 @@
       <%= post.user.user_initial %>
     </span>
     <div class="media-body border-bottom border-gray">
-    <p class="pb-3 mb-0 small lh-125">
+    <p class="pb-3 mb-0 small lh-125 content-to-edit-container">
       <strong class="d-block text-gray-dark"> <%= post.user.username %> </strong>
       <%= post.content %>
+      <% if post.user == current_user %>
+        <%= link_to("Edit", "#", data: {
+          toggle: "modal", target: "#edit-post-modal-"+post.id.to_s}) %>
+      <% end %>
     </p>
+    <% if post.user == current_user %>
+      <%= render 'clubs/posts/edit_post_modal', post: post%>
+    <% end %>
     <%= render 'clubs/posts/comments/form_for_comments', post: post%>
     <%= render 'clubs/posts/comments/show_comments', post: post%>
     </div>

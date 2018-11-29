@@ -1,4 +1,4 @@
-<%= form_for [@club,@new_post] do |f| %>
+<%= form_for [club,post] do |f| %>
   <%= f.text_area :content,class: 'form-control', placeholder: 'What do you think about the book?'%>
   <%= f.submit "Post", class: 'float-right btn btn-light mt-1' %><br/>
 <% end %>

@@ -1,0 +1,15 @@
+<div class="modal fade bd-example-modal-sm" id="<%= "edit-post-modal-"+post.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="newBookModalLabel">Edit Your Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'clubs/posts/form_for_posts', club: @club, post: post%>
+      </div>
+    </div>
+  </div>
+</div>
