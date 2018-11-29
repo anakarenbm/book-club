@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def is_member_of_club?(club)
     return UserClub.where(user: self, club: club).any?
   end
+
+  def is_admin_of_club?(club)
+    return club.admin == self
+  end
 end

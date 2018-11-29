@@ -7,7 +7,7 @@
           <div class="card-body">
             <h3 class="card-title"> <%= club.title %> </h3>
             <p class="card-text">  <%= club.description %>  </p>
-            <% if current_user.is_member_of_club?(club) %>
+            <% if current_user.is_member_of_club?(club) || current_user.is_admin_of_club?(club) %>
               <div class="mb-3 mt-3"> <%= link_to 'Open', club,  class: 'btn btn-light' %> </div>
             <% else %>
               <%= form_for [club, @new_user_joins_club] do |f| %>
