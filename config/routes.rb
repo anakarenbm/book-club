@@ -46,6 +46,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: redirect('/clubs')
-  # root to: "users#index"
+  # root to: redirect('/clubs')
+root to: 'users#current_user_home'
 end
