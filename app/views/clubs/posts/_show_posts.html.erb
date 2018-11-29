@@ -1,0 +1,15 @@
+<% Post.where("club_id = ?", @club.id).find_each do |post| %>
+  <div class="media text-muted pt-3">
+    <span alt="32x32" class="d-flex justify-content-center mr-2 rounded post-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
+      <%= post.user.user_initial %>
+    </span>
+    <div class="media-body border-bottom border-gray">
+    <p class="pb-3 mb-0 small lh-125">
+      <strong class="d-block text-gray-dark"> <%= post.user.username %> </strong>
+      <%= post.content %>
+    </p>
+    <%= render 'clubs/posts/comments/form_for_comments', post: post%>
+    <%= render 'clubs/posts/comments/show_comments', post: post%>
+    </div>
+  </div>
+<% end %>

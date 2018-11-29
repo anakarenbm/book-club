@@ -1,0 +1,13 @@
+<% Comment.where("post_id = ?", post.id).find_each do |comment| %>
+  <div class="media mt-3">
+    <a class="pr-3">
+      <span alt="32x32" class="d-flex justify-content-center mr-2 rounded comment-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
+        <%= comment.user.user_initial %>
+      </span>
+    </a>
+    <p class="pb-3 mb-0 small lh-125">
+      <strong class="d-block text-gray-dark"> <%= comment.user.username %> </strong>
+      <%= comment.content %>
+    </p>
+  </div>
+<% end %>

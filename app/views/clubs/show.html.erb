@@ -2,61 +2,19 @@
   <% if current_user.is_admin_of_club?(@club) %>
     <%= render 'admin_dropdown', club: @club %>
   <% end %>
-
   <h1 class="display-4"><%= @club.title %></h1>
   <p class="lead"><%= @club.description %></p>
-
   <div class="row">
     <div class="col-md-4 order-md-2 mb-4 p-0 container-sidebar">
       <%= render 'book_card', club: @club %>
     </div>
     <div class="col-md-8 order-md-1 container-body">
       <div class="my-3 p-3 bg-white rounded box-shadow">
-        <%= form_for [@club,@new_post] do |f| %>
-          <%= f.text_area :content,class: 'form-control', placeholder: 'What do you think about the book?'%>
-          <%= f.submit "Post", class: 'float-right btn btn-light mt-1' %><br/>
-        <% end %>
+        <%= render 'clubs/posts/form_for_posts' %>
         <div class="container">
-        <h6 class="border-bottom border-gray pb-2 mb-0"> Recent Posts </h6>
-        <% Post.where("club_id = ?", @club.id).find_each do |post| %>
-
-          <div class="media text-muted pt-3">
-            <span alt="32x32" class="d-flex justify-content-center mr-2 rounded post-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
-              <%= post.user.user_initial %>
-            </span>
-            <div class="media-body border-bottom border-gray">
-            <p class="pb-3 mb-0 small lh-125">
-              <strong class="d-block text-gray-dark"> <%= post.user.username %> </strong>
-              <%= post.content %>
-            </p>
-
-            <%= form_for [@club, post, @new_comment] do |f| %>
-              <div class="input-group input-group-sm mb-3">
-                <%= f.text_field :content,class: 'form-control', placeholder: 'Reply to this post..'%>
-                <div class="input-group-append">
-                  <%= f.submit "Comment", class:'btn btn-outline-secondary' %><br/>
-                </div>
-              </div>
-            <% end %>
-
-            <% Comment.where("post_id = ?", post.id).find_each do |comment| %>
-              <div class="media mt-3">
-                <a class="pr-3">
-                  <span alt="32x32" class="d-flex justify-content-center mr-2 rounded comment-user-display" style="width: 32px; height: 32px;" data-holder-rendered="true">
-                    <%= comment.user.user_initial %>
-                  </span>
-                </a>
-                <p class="pb-3 mb-0 small lh-125">
-                  <strong class="d-block text-gray-dark"> <%= comment.user.username %> </strong>
-                  <%= comment.content %>
-                </p>
-              </div>
-            <% end %>
-
-            </div>
-          </div>
-        <% end %>
-      </div>
+          <h6 class="border-bottom border-gray pb-2 mb-0"> Recent Posts </h6>
+          <%= render 'clubs/posts/show_posts' %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,8 @@
+<%= form_for [@club, post, @new_comment] do |f| %>
+  <div class="input-group input-group-sm mb-3">
+    <%= f.text_field :content,class: 'form-control', placeholder: 'Reply to this post..'%>
+    <div class="input-group-append">
+      <%= f.submit "Comment", class:'btn btn-outline-secondary' %><br/>
+    </div>
+  </div>
+<% end %>
