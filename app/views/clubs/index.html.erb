@@ -3,7 +3,7 @@
 <% if user_signed_in? %>
   <div class="card-columns">
     <% @clubs.each do |club| %>
-        <div class="card text-center" style="width: 18rem;">
+        <div class="card text-center club-cards" style="width: 18rem;">
           <div class="card-body">
             <h3 class="card-title"> <%= club.title %> </h3>
             <p class="card-text">  <%= club.description %>  </p>

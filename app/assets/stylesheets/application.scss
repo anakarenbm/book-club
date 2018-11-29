@@ -20,6 +20,15 @@
     height: max-content;
 }
 
+.user-card {
+  background-color: #DDA3B2;
+}
+
+.list-group-item.active {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
 .post-user-display {
   background-color: #42acc8;
 }
@@ -58,5 +67,6 @@
   width: -webkit-fill-available;
 }
 
-// papaya
-// #E24E42
+.club-cards {
+  background-color: #F7CE3E;
+}
