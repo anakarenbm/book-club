@@ -15,7 +15,7 @@
     <% if post.user == current_user %>
       <%= render 'clubs/posts/edit_post_modal', post: post%>
     <% end %>
-    <%= render 'clubs/posts/comments/form_for_comments', post: post%>
+    <%= render 'clubs/posts/comments/form_for_comments', club: @club, post: post, comment: @new_comment%>
     <%= render 'clubs/posts/comments/show_comments', post: post%>
     </div>
   </div>
