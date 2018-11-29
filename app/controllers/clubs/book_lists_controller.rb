@@ -15,6 +15,19 @@ module Clubs
       end
     end
 
+    def update
+      @club = Club.find(params[:club_id])
+      @book_list = BookList.find(params[:id])
+
+      respond_to do |format|
+        if @book_list.update(book_list_params)
+          format.html { redirect_to @club, notice: 'New Book was added to the club.' }
+        else
+          format.html { redirect_to @club, notice: @book_list.errors.full_messages }
+        end
+      end
+    end
+
     private
 
       def book_list_params

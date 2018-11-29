@@ -31,29 +31,32 @@
       <p>
         <strong>Avg Rating:</strong> <%= pluralize(current_club_book_list_item.book.avgRating, "star") %>
       </p>
-      <% if current_user.is_admin_of_club?(@club) %>
-        <div class="d-flex justify-content-between align-items-center">
-          <%= link_to "Change Book", club_path(@club), remote: true, class: 'btn btn-sm btn-outline-secondary'%>
-        </div>
+
+      <% if @club.book_due_date.nil? %>
+        <% if current_user.is_admin_of_club?(@club) %>
+          <div class="d-flex justify-content-between align-items-center">
+            <%= form_for @club do |f| %>
+              <div class="field">
+                <%= f.label :book_due_date, 'Due Date:' %>
+                <%= f.date_select :book_due_date %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>
+          <strong>Book due date:</strong>
+          <%= @club.book_due_date %>
+        </p>
       <% end %>
-    <% end %>
-    <% if @club.book_due_date.nil? %>
       <% if current_user.is_admin_of_club?(@club) %>
         <div class="d-flex justify-content-between align-items-center">
-          <%= form_for @club do |f| %>
-            <div class="field">
-              <%= f.label :book_due_date, 'Due Date:' %>
-              <%= f.date_select :book_due_date %>
-            </div>
+          <%= form_for [@club,current_club_book_list_item] do |f| %>
+              <%= f.label :book_id, 'Change Book:' %>
+              <%= f.collection_select(:book_id, Book.all, :id, :title, {:prompt => "Change Book"}, {:class=>'form-control', :onchange => 'this.form.submit()'}) %>
           <% end %>
         </div>
       <% end %>
-    <% else %>
-      <p>
-        <strong>Book due date:</strong>
-        <%= @club.book_due_date %>
-      </p>
     <% end %>
-
   </div>
 </div>
