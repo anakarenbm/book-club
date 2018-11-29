@@ -10,9 +10,9 @@
       <div class="card mb-4 shadow-sm book-content">
         <%= image_tag book.picture_url, style:'height: 225px; width: 100%; display: block;'%>
         <div class="card-body">
-          <%= link_to edit_book_path(book), remote: true, class: 'edit_book_modal_link btn btn-sm btn-outline-secondary edit-link' do %>
-          <%= icon_tag "edit-icon" %> <% end %>
-          <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true"></div>
+          <%= link_to edit_book_path(book), data: { toggle: "modal", target: "#edit-book-modal-"+book.id.to_s}, class: 'edit_book_modal_link btn btn-sm btn-outline-secondary edit-link' do %>
+            <%= icon_tag "edit-icon" %>
+          <% end %>
           <h5 class="card-title"> <%= book.title %> </h5>
           <p>
             <strong>Author:</strong> <%= book.author %>
@@ -37,5 +37,6 @@
         </div>
       </div>
     </div>
+    <%= render 'edit_book_modal', book: book%>
   <% end %>
 </div>

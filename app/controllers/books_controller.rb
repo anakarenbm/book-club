@@ -26,24 +26,19 @@ class BooksController < ApplicationController
         format.html { redirect_to books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @club }
       else
-        format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.html { redirect_to books_path, notice: 'Error creating book.' }
       end
     end
   end
 
   def update
-    puts 'UPSATEEEEEEEEEEEE'
+    @edit_book = Book.find(params[:id])
 
     respond_to do |format|
-      puts 'UPSATEEEEEEEEEEEE'
-
       if @edit_book.update(book_params)
         format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @club }
       else
-        format.html { render :edit }
-        format.json { render json: @edit_book.errors, status: :unprocessable_entity }
+        format.html { redirect_to books_path, notice: 'Error updating book.' }
       end
     end
   end
